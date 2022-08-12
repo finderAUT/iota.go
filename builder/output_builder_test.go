@@ -141,7 +141,7 @@ func TestNFTOutputBuilder(t *testing.T) {
 		immMetadata        = []byte("654321")
 	)
 
-	foundryOutput, err := builder.NewNFTOutputBuilder(targetAddr, deposit).
+	nftOutput, err := builder.NewNFTOutputBuilder(targetAddr, deposit).
 		NativeToken(nt).
 		Metadata(metadata).
 		ImmutableMetadata(immMetadata).
@@ -160,5 +160,5 @@ func TestNFTOutputBuilder(t *testing.T) {
 		ImmutableFeatures: iotago.Features[iotago.NFTImmFeature]{
 			&iotago.MetadataFeature{Data: immMetadata},
 		},
-	}, foundryOutput)
+	}, nftOutput)
 }
