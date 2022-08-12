@@ -92,6 +92,7 @@ func TestAliasOutputBuilder(t *testing.T) {
 	expectedCpy.StateIndex++
 	updatedOutput, err := builder.NewAliasOutputBuilderFromPrevious(aliasOutput).StateTransition().
 		Deposit(newDeposit).Builder().Build()
+	require.NoError(t, err)
 	require.Equal(t, expectedCpy, updatedOutput)
 }
 

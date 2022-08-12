@@ -504,7 +504,7 @@ func (builder *NFTOutputBuilder) Metadata(data []byte) *NFTOutputBuilder {
 }
 
 // ImmutableMetadata sets/modifies an iotago.MetadataFeature as an immutable feature on the output.
-// Only call this function on a new iotago.NFTOutput
+// Only call this function on a new iotago.NFTOutput.
 func (builder *NFTOutputBuilder) ImmutableMetadata(data []byte) *NFTOutputBuilder {
 	builder.output.ImmutableFeatures.Upsert(&iotago.MetadataFeature{Data: data})
 	return builder
