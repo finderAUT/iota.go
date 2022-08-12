@@ -5,8 +5,6 @@ import (
 	"crypto/ed25519"
 	"fmt"
 
-	"github.com/iancoleman/orderedmap"
-
 	"github.com/iotaledger/hive.go/core/serix"
 	"github.com/iotaledger/hive.go/serializer/v2"
 )
@@ -179,14 +177,6 @@ func (v *v2api) JSONDecode(jsonData []byte, obj any, opts ...serix.Option) error
 
 func (v *v2api) Underlying() *serix.API {
 	return v.serixAPI
-}
-
-func (v *v2api) MapDecode(m map[string]any, obj any, opts ...serix.Option) error {
-	return v.serixAPI.MapDecode(v.ctx, m, obj, opts...)
-}
-
-func (v *v2api) MapEncode(obj interface{}, opts ...serix.Option) (*orderedmap.OrderedMap, error) {
-	return v.serixAPI.MapEncode(v.ctx, obj, opts...)
 }
 
 func (v *v2api) Encode(obj interface{}, opts ...serix.Option) ([]byte, error) {
