@@ -35,7 +35,7 @@ func RandByte() byte {
 func RandBytes(length int) []byte {
 	var b []byte
 	for i := 0; i < length; i++ {
-		b = append(b, byte(rand.Intn(256)))
+		b = append(b, byte(rand.Intn(127)))
 	}
 	return b
 }
