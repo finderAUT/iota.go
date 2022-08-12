@@ -1,7 +1,6 @@
 package iotago_test
 
 import (
-	"encoding/json"
 	"reflect"
 	"testing"
 
@@ -53,15 +52,6 @@ func (test *deSerializeTest) deSerialize(t *testing.T) {
 	sourceJson, err := v2API.JSONEncode(test.source)
 	require.NoError(t, err)
 
-	src := test.source.(*iotago.ProtocolParameters)
-	normalJson, err := json.Marshal(test.source)
-	require.NoError(t, err)
-
-	newProto := &iotago.ProtocolParameters{}
-	require.NoError(t, json.Unmarshal(normalJson, newProto))
-
-	require.Equal(t, src.NetworkName, newProto.NetworkName)
-
 	jsonDest := reflect.New(reflect.TypeOf(test.target).Elem()).Interface()
 	require.NoError(t, v2API.JSONDecode(sourceJson, jsonDest))
 
@@ -98,19 +88,12 @@ func TestProtocolParametersJSONMarshalling(t *testing.T) {
 	}
 	protoParasJSON := `{"version":6,"networkName":"xxxNetwork","bech32Hrp":"xxx","minPowScore":666,"belowMaxDepth":15,"rentStructure":{"vByteCost":6,"vByteFactorData":8,"vByteFactorKey":7},"tokenSupply":"1234567890987654321"}`
 
-	mapProtoParas, err := v2API.MapEncode(protoParas)
+	jsonProtoParas, err := v2API.JSONEncode(protoParas)
 	require.NoError(t, err)
-
-	j, err := json.Marshal(mapProtoParas)
-	require.NoError(t, err)
-
-	require.Equal(t, protoParasJSON, string(j))
+	require.Equal(t, protoParasJSON, string(jsonProtoParas))
 
 	decodedProtoParas := &iotago.ProtocolParameters{}
-	m := map[string]any{}
-	err = json.Unmarshal([]byte(protoParasJSON), &m)
-	require.NoError(t, err)
-	err = v2API.MapDecode(m, decodedProtoParas)
+	err = v2API.JSONDecode([]byte(protoParasJSON), decodedProtoParas)
 	require.NoError(t, err)
 
 	require.Equal(t, protoParas, decodedProtoParas)

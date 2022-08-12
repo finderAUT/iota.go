@@ -1,7 +1,6 @@
 package iotago_test
 
 import (
-	"encoding/json"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -32,18 +31,13 @@ func TestRentStructureJSONMarshalling(t *testing.T) {
 	}
 	rentStructureJSON := `{"vByteCost":500,"vByteFactorData":1,"vByteFactorKey":10}`
 
-	mapRentStructure, err := v2API.MapEncode(rentStructure)
-	require.NoError(t, err)
-	j, err := json.Marshal(mapRentStructure)
+	j, err := v2API.JSONEncode(rentStructure)
 	require.NoError(t, err)
 
 	require.Equal(t, rentStructureJSON, string(j))
 
 	decodedRentStructure := &iotago.RentStructure{}
-	m := map[string]any{}
-	err = json.Unmarshal([]byte(rentStructureJSON), &m)
-	require.NoError(t, err)
-	err = v2API.MapDecode(m, decodedRentStructure)
+	err = v2API.JSONDecode([]byte(rentStructureJSON), decodedRentStructure)
 	require.NoError(t, err)
 
 	require.Equal(t, rentStructure, decodedRentStructure)

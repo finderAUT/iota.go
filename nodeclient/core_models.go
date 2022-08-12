@@ -323,17 +323,13 @@ func (nor *OutputMetadataResponse) TxID() (*iotago.TransactionID, error) {
 
 // Output deserializes the RawOutput to an Output.
 func (nor *OutputResponse) Output() (iotago.Output, error) {
-	m := map[string]any{}
 	outResJson, err := json.Marshal(nor)
 	if err != nil {
 		return nil, err
 	}
-	if err := json.Unmarshal(outResJson, &m); err != nil {
-		return nil, err
-	}
 
 	o := &outputResAux{}
-	if err := _internalAPI.MapDecode(m, o); err != nil {
+	if err := _internalAPI.JSONDecode(outResJson, o); err != nil {
 		return nil, err
 	}
 
@@ -342,17 +338,13 @@ func (nor *OutputResponse) Output() (iotago.Output, error) {
 
 // ProtocolParameters returns the protocol parameters within the info response.
 func (info *InfoResponse) ProtocolParameters() (*iotago.ProtocolParameters, error) {
-	m := map[string]any{}
 	protoJson, err := json.Marshal(info.Protocol)
 	if err != nil {
 		return nil, err
 	}
-	if err := json.Unmarshal(protoJson, &m); err != nil {
-		return nil, err
-	}
 
 	o := &iotago.ProtocolParameters{}
-	if err := _internalAPI.MapDecode(m, o); err != nil {
+	if err := _internalAPI.JSONDecode(protoJson, o); err != nil {
 		return nil, err
 	}
 

@@ -97,9 +97,7 @@ func TestClient_Info(t *testing.T) {
 		},
 	}
 
-	protoParasMap, err := v2API.MapEncode(protoParas)
-	require.NoError(t, err)
-	protoParasJson, err := json.Marshal(protoParasMap)
+	protoParasJson, err := v2API.JSONEncode(protoParas)
 	require.NoError(t, err)
 	protoParasJsonRawMsg := json.RawMessage(protoParasJson)
 	originInfo.Protocol = &protoParasJsonRawMsg
@@ -316,9 +314,7 @@ func TestClient_OutputByID(t *testing.T) {
 	defer gock.Off()
 
 	originOutput := tpkg.RandBasicOutput(iotago.AddressEd25519)
-	sigDepMap, err := v2API.MapEncode(originOutput)
-	require.NoError(t, err)
-	sigDepJson, err := json.Marshal(sigDepMap)
+	sigDepJson, err := v2API.JSONEncode(originOutput)
 	require.NoError(t, err)
 	rawMsgSigDepJson := json.RawMessage(sigDepJson)
 
@@ -421,9 +417,7 @@ func TestNodeHTTPAPIClient_Receipts(t *testing.T) {
 		},
 	}
 
-	receiptMap, err := v2API.MapEncode(receipt)
-	require.NoError(t, err)
-	receiptJson, err := json.Marshal(receiptMap)
+	receiptJson, err := v2API.JSONEncode(receipt)
 	require.NoError(t, err)
 	rawMsgReceiptJson := json.RawMessage(receiptJson)
 
@@ -468,9 +462,7 @@ func TestNodeHTTPAPIClient_ReceiptsByMigratedAtIndex(t *testing.T) {
 		},
 	}
 
-	receiptMap, err := v2API.MapEncode(receipt)
-	require.NoError(t, err)
-	receiptJson, err := json.Marshal(receiptMap)
+	receiptJson, err := v2API.JSONEncode(receipt)
 	require.NoError(t, err)
 	rawMsgReceiptJson := json.RawMessage(receiptJson)
 

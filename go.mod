@@ -7,7 +7,7 @@ require (
 	github.com/eclipse/paho.mqtt.golang v1.4.1
 	github.com/ethereum/go-ethereum v1.10.21
 	github.com/iancoleman/orderedmap v0.2.0
-	github.com/iotaledger/hive.go/core v1.0.0-beta.2.0.20220812111606-de0c9c65099c
+	github.com/iotaledger/hive.go/core v1.0.0-beta.2.0.20220812121711-b7275d97f85b
 	github.com/iotaledger/hive.go/serializer/v2 v2.0.0-beta.2
 	github.com/iotaledger/iota.go v1.0.0
 	github.com/pasztorpisti/qs v0.0.0-20171216220353-8d6c33ee906c
