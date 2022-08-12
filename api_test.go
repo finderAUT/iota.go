@@ -50,16 +50,22 @@ func (test *deSerializeTest) deSerialize(t *testing.T) {
 	require.Len(t, serixData, bytesRead)
 	require.EqualValues(t, test.source, serixTarget)
 
-	sourceMap, err := v2API.MapEncode(test.source)
+	sourceJson, err := v2API.JSONEncode(test.source)
 	require.NoError(t, err)
 
-	jsonRep, err := json.MarshalIndent(sourceMap, "", "\t")
+	src := test.source.(*iotago.ProtocolParameters)
+	normalJson, err := json.Marshal(test.source)
 	require.NoError(t, err)
 
-	destMap := map[string]any{}
-	require.NoError(t, json.Unmarshal(jsonRep, &destMap))
+	newProto := &iotago.ProtocolParameters{}
+	require.NoError(t, json.Unmarshal(normalJson, newProto))
+
+	require.Equal(t, src.NetworkName, newProto.NetworkName)
+
 	jsonDest := reflect.New(reflect.TypeOf(test.target).Elem()).Interface()
-	require.NoError(t, v2API.MapDecode(destMap, jsonDest))
+	require.NoError(t, v2API.JSONDecode(sourceJson, jsonDest))
+
+	require.EqualValues(t, test.source, jsonDest)
 }
 
 func TestProtocolParameters_DeSerialize(t *testing.T) {

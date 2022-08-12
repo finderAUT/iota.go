@@ -81,6 +81,8 @@ github.com/iancoleman/orderedmap v0.2.0 h1:sq1N/TFpYH++aViPcaKjys3bDClUEU7s5B+z6
 github.com/iancoleman/orderedmap v0.2.0/go.mod h1:N0Wam8K1arqPXNWjMo21EXnBPOPp36vB07FNRdD2geA=
 github.com/iotaledger/hive.go/core v1.0.0-beta.2.0.20220810074756-bd5cf71d7227 h1:u2J5GBF+H9G4s3pSGyG4Cmj3t9VhdegXIL9xuoUTZ/Q=
 github.com/iotaledger/hive.go/core v1.0.0-beta.2.0.20220810074756-bd5cf71d7227/go.mod h1:aBKzVl6kjSz2bHsNoxAmTJUpHf/sr1x0PdOJbteEcsQ=
+github.com/iotaledger/hive.go/core v1.0.0-beta.2.0.20220812111606-de0c9c65099c h1:OgoTyDRc9gODN+SbX0bcQHIOkL33fJLnR1ifQ3OCf94=
+github.com/iotaledger/hive.go/core v1.0.0-beta.2.0.20220812111606-de0c9c65099c/go.mod h1:aBKzVl6kjSz2bHsNoxAmTJUpHf/sr1x0PdOJbteEcsQ=
 github.com/iotaledger/hive.go/serializer/v2 v2.0.0-beta.2 h1:3eiiw4JazsOgDcyxT5dA4UhFRHO5NCAWyWwOl8aRa94=
 github.com/iotaledger/hive.go/serializer/v2 v2.0.0-beta.2/go.mod h1:beZKjVT4HPayWfwsmItNNI5E81rS783vGx5ZwRbZQgY=
 github.com/iotaledger/iota.go v1.0.0 h1:tqm1FxJ/zOdzbrAaQ5BQpVF8dUy2eeGlSeWlNG8GoXY=

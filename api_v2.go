@@ -169,6 +169,14 @@ type v2api struct {
 	serixAPI *serix.API
 }
 
+func (v *v2api) JSONEncode(obj any, opts ...serix.Option) ([]byte, error) {
+	return v.serixAPI.JSONEncode(v.ctx, obj, opts...)
+}
+
+func (v *v2api) JSONDecode(jsonData []byte, obj any, opts ...serix.Option) error {
+	return v.serixAPI.JSONDecode(v.ctx, jsonData, obj, opts...)
+}
+
 func (v *v2api) Underlying() *serix.API {
 	return v.serixAPI
 }

@@ -31,6 +31,10 @@ type API interface {
 	Encode(obj any, opts ...serix.Option) ([]byte, error)
 	// Decode decodes the given bytes into object.
 	Decode(b []byte, obj any, opts ...serix.Option) (int, error)
+	// JSONEncode encodes the given object to its json representation.
+	JSONEncode(obj any, opts ...serix.Option) ([]byte, error)
+	// JSONDecode decodes the json data into object.
+	JSONDecode(jsonData []byte, obj any, opts ...serix.Option) error
 	// MapEncode encodes the object into an ordered map.
 	MapEncode(obj any, opts ...serix.Option) (*orderedmap.OrderedMap, error)
 	// MapDecode decodes the generic map into object.
