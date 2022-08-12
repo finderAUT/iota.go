@@ -162,6 +162,7 @@ var (
 	}
 )
 
+// v2api implements the Stardust protocol core models.
 type v2api struct {
 	ctx      context.Context
 	serixAPI *serix.API
@@ -187,7 +188,7 @@ func (v *v2api) Decode(b []byte, obj interface{}, opts ...serix.Option) (int, er
 	return v.serixAPI.Decode(v.ctx, b, obj, opts...)
 }
 
-// V2API instantiates an API instance with types registered conforming to protocol version 2 of the IOTA protocol.
+// V2API instantiates an API instance with types registered conforming to protocol version 2 (Stardust) of the IOTA protocol.
 func V2API(protoParas *ProtocolParameters) API {
 	api := serix.NewAPI()
 

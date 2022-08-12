@@ -1,8 +1,10 @@
 package iotago
 
 import (
+	"bytes"
 	"errors"
 	"math/big"
+	"sort"
 
 	"github.com/iotaledger/hive.go/serializer/v2"
 )
@@ -131,6 +133,24 @@ func (n NativeTokens) Equal(other NativeTokens) bool {
 		}
 	}
 	return true
+}
+
+// Upsert adds the given NativeToken or updates the previous one if existing.
+func (n *NativeTokens) Upsert(nt *NativeToken) {
+	for i, ele := range *n {
+		if ele.ID == nt.ID {
+			(*n)[i] = nt
+			return
+		}
+	}
+	*n = append(*n, nt)
+}
+
+// Sort sorts the NativeTokens in place.
+func (n NativeTokens) Sort() {
+	sort.Slice(n, func(i, j int) bool {
+		return bytes.Compare(n[i].ID[:], n[j].ID[:]) < 0
+	})
 }
 
 // NativeToken represents a token which resides natively on the ledger.

@@ -3,6 +3,7 @@ package iotago
 import (
 	"errors"
 	"fmt"
+	"sort"
 
 	"github.com/iotaledger/hive.go/serializer/v2"
 )
@@ -124,6 +125,22 @@ func (f UnlockConditions[T]) MustSet() UnlockConditionSet {
 		panic(err)
 	}
 	return set
+}
+
+// Upsert adds the given unlock condition or updates the previous one if existing.
+func (f *UnlockConditions[T]) Upsert(unlockCondition T) {
+	for i, ele := range *f {
+		if ele.Type() == unlockCondition.Type() {
+			(*f)[i] = unlockCondition
+			return
+		}
+	}
+	*f = append(*f, unlockCondition)
+}
+
+// Sort sorts the UnlockConditions in place by type.
+func (f UnlockConditions[T]) Sort() {
+	sort.Slice(f, func(i, j int) bool { return f[i].Type() < f[j].Type() })
 }
 
 // UnlockConditionSet is a set of UnlockCondition(s).

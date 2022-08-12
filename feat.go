@@ -3,6 +3,7 @@ package iotago
 import (
 	"errors"
 	"fmt"
+	"sort"
 
 	"github.com/iotaledger/hive.go/serializer/v2"
 )
@@ -52,7 +53,7 @@ func (featType FeatureType) String() string {
 
 var (
 	featNames = [FeatureTag + 1]string{
-		"SenderFeature", "IssuerFeature", "MetadataFeature", "TagFeature",
+		"SenderFeature", "Issuer", "MetadataFeature", "TagFeature",
 	}
 )
 
@@ -123,6 +124,22 @@ func (f Features[T]) Equal(other Features[T]) bool {
 	return true
 }
 
+// Upsert adds the given feature or updates the previous one if existing.
+func (f *Features[T]) Upsert(feature T) {
+	for i, ele := range *f {
+		if ele.Type() == feature.Type() {
+			(*f)[i] = feature
+			return
+		}
+	}
+	*f = append(*f, feature)
+}
+
+// Sort sorts the Features in place by type.
+func (f Features[T]) Sort() {
+	sort.Slice(f, func(i, j int) bool { return f[i].Type() < f[j].Type() })
+}
+
 // FeatureSet is a set of Feature(s).
 type FeatureSet map[FeatureType]Feature
 
@@ -144,8 +161,8 @@ func (f FeatureSet) SenderFeature() *SenderFeature {
 	return b.(*SenderFeature)
 }
 
-// IssuerFeature returns the IssuerFeature in the set or nil.
-func (f FeatureSet) IssuerFeature() *IssuerFeature {
+// Issuer returns the IssuerFeature in the set or nil.
+func (f FeatureSet) Issuer() *IssuerFeature {
 	b, has := f[FeatureIssuer]
 	if !has {
 		return nil
@@ -153,8 +170,8 @@ func (f FeatureSet) IssuerFeature() *IssuerFeature {
 	return b.(*IssuerFeature)
 }
 
-// MetadataFeature returns the MetadataFeature in the set or nil.
-func (f FeatureSet) MetadataFeature() *MetadataFeature {
+// Metadata returns the MetadataFeature in the set or nil.
+func (f FeatureSet) Metadata() *MetadataFeature {
 	b, has := f[FeatureMetadata]
 	if !has {
 		return nil
@@ -162,8 +179,8 @@ func (f FeatureSet) MetadataFeature() *MetadataFeature {
 	return b.(*MetadataFeature)
 }
 
-// TagFeature returns the TagFeature in the set or nil.
-func (f FeatureSet) TagFeature() *TagFeature {
+// Tag returns the TagFeature in the set or nil.
+func (f FeatureSet) Tag() *TagFeature {
 	b, has := f[FeatureTag]
 	if !has {
 		return nil

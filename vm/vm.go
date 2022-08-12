@@ -225,7 +225,7 @@ func IsIssuerOnOutputUnlocked(output iotago.ChainOutput, unlockedIdents Unlocked
 		return nil
 	}
 
-	issuerFeat := immFeats.IssuerFeature()
+	issuerFeat := immFeats.Issuer()
 	if issuerFeat == nil {
 		return nil
 	}
