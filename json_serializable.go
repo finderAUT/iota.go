@@ -3,7 +3,7 @@ package iotago
 import (
 	"encoding/json"
 	"errors"
-	"github.com/iotaledger/hive.go/serializer"
+	"github.com/finderAUT/hive.go/v2/serializer"
 )
 
 var (

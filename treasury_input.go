@@ -4,7 +4,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"github.com/iotaledger/hive.go/serializer"
+	"github.com/finderAUT/hive.go/v2/serializer"
 
 	"golang.org/x/crypto/blake2b"
 )

@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/iotaledger/hive.go/serializer"
+	"github.com/finderAUT/hive.go/v2/serializer"
 	"github.com/iotaledger/iota.go/v2/pow"
 	"golang.org/x/crypto/blake2b"
 )

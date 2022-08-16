@@ -2,7 +2,7 @@ package iotagox_test
 
 import (
 	"context"
-	"github.com/iotaledger/hive.go/serializer"
+	"github.com/finderAUT/hive.go/v2/serializer"
 	"github.com/iotaledger/iota.go/v2/tpkg"
 	"github.com/iotaledger/iota.go/v2/x"
 	"testing"

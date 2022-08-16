@@ -2,7 +2,7 @@ package iotago_test
 
 import (
 	"errors"
-	"github.com/iotaledger/hive.go/serializer"
+	"github.com/finderAUT/hive.go/v2/serializer"
 	"github.com/iotaledger/iota.go/v2/tpkg"
 	"testing"
 

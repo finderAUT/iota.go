@@ -2,7 +2,7 @@ package iotago
 
 import (
 	"fmt"
-	"github.com/iotaledger/hive.go/serializer"
+	"github.com/finderAUT/hive.go/v2/serializer"
 )
 
 // NewReceiptBuilder creates a new ReceiptBuilder.

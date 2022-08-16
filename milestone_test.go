@@ -3,7 +3,7 @@ package iotago_test
 import (
 	"encoding/json"
 	"errors"
-	"github.com/iotaledger/hive.go/serializer"
+	"github.com/finderAUT/hive.go/v2/serializer"
 	"github.com/iotaledger/iota.go/v2/tpkg"
 	"math/rand"
 	"sort"
