@@ -62,6 +62,10 @@ const (
 	// GET returns message data (json).
 	NodeAPIRouteMessageData = "/api/v1/messages/%s"
 
+	// NodeAPIRouteMessageProof is the route for getting message inclusion proof by its messageID.
+	// GET returns message data (json), milestone index, proof data (base64) and proof index.
+	NodeAPIRouteMessageProof = "/api/v1/messages/%s/proof"
+
 	// NodeAPIRouteMessageMetadata is the route for getting message metadata by its messageID.
 	// GET returns message metadata (including info about "promotion/reattachment needed").
 	NodeAPIRouteMessageMetadata = "/api/v1/messages/%s/metadata"
@@ -521,6 +525,30 @@ func (api *NodeHTTPAPIClient) MessageJSONByMessageID(ctx context.Context, msgID 
 	query := fmt.Sprintf(NodeAPIRouteMessageData, hex.EncodeToString(msgID[:]))
 
 	res := &Message{}
+	_, err := api.Do(ctx, http.MethodGet, query, nil, res)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// MessageProof defines the response of a GET message proof REST API call.
+type MessageProof struct {
+	// The base64 encoded proof data of the message.
+	Proof string `json:"proof"`
+	// The message the proof is for
+	Message Message `json:"message"`
+	// The milestone index the message is included
+	MilestoneIndex uint32 `json:"milestoneIndex"`
+	// The reason why this message is marked as conflicting.
+	ProofIndex uint32 `json:"conflictReason,omitempty"`
+}
+
+// MessageProofJSONByMessageID get a message proof by its message ID from the node (json).
+func (api *NodeHTTPAPIClient) MessageProofJSONByMessageID(ctx context.Context, msgID MessageID) (*MessageProof, error) {
+	query := fmt.Sprintf(NodeAPIRouteMessageProof, hex.EncodeToString(msgID[:]))
+
+	res := &MessageProof{}
 	_, err := api.Do(ctx, http.MethodGet, query, nil, res)
 	if err != nil {
 		return nil, err
