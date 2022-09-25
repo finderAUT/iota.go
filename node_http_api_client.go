@@ -534,14 +534,14 @@ func (api *NodeHTTPAPIClient) MessageJSONByMessageID(ctx context.Context, msgID 
 
 // MessageProof defines the response of a GET message proof REST API call.
 type MessageProof struct {
-	// The base64 encoded proof data of the message.
-	Proof string `json:"proof"`
-	// The message the proof is for
-	Message Message `json:"message"`
 	// The milestone index the message is included
 	MilestoneIndex uint32 `json:"milestoneIndex"`
-	// The reason why this message is marked as conflicting.
-	ProofIndex uint32 `json:"conflictReason,omitempty"`
+	// The message the proof is for
+	Message Message `json:"message"`
+	// The index of the message in the merkle proof data
+	ProofIndex uint32 `json:"proofIndex"`
+	// The base64 encoded proof data of the message.
+	Proof string `json:"proofData"`
 }
 
 // MessageProofJSONByMessageID get a message proof by its message ID from the node (json).
