@@ -87,6 +87,10 @@ const (
 	// GET returns the milestone.
 	NodeAPIRouteMilestone = "/api/v1/milestones/%s"
 
+	// NodeAPIRouteMilestoneIncludedMessages is the route for getting a milestones included messages by its milestoneIndex.
+	// GET returns the milestone included messages.
+	NodeAPIRouteMilestoneIncludedMessages = "/api/v1/milestones/%s/included-messages"
+
 	// NodeAPIRouteMilestoneUTXOChanges is the route for getting all UTXO changes of a milestone by its milestoneIndex.
 	// GET returns the output IDs of all UTXO changes.
 	NodeAPIRouteMilestoneUTXOChanges = "/api/v1/milestones/%s/utxo-changes"
@@ -857,6 +861,27 @@ func (api *NodeHTTPAPIClient) MilestoneByIndex(ctx context.Context, index uint32
 	query := fmt.Sprintf(NodeAPIRouteMilestone, strconv.FormatUint(uint64(index), 10))
 
 	res := &MilestoneResponse{}
+	_, err := api.Do(ctx, http.MethodGet, query, nil, res)
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+
+// MilestoneIncludedMessagesResponse defines the response of a GET milestones/{index}/included-messages REST API call.
+type MilestoneIncludedMessagesResponse struct {
+	// The index of the milestone.
+	Index uint32 `json:"index"`
+	// The hex encoded message IDs of the messages included in the milestone with the given index
+	MessageID []string `json:"includedMessages"`
+}
+
+// MilestoneIncludedMessagesByIndex gets a milestone included messages by its index.
+func (api *NodeHTTPAPIClient) MilestoneIncludedMessagesByIndex(ctx context.Context, index uint32) (*MilestoneIncludedMessagesResponse, error) {
+	query := fmt.Sprintf(NodeAPIRouteMilestoneIncludedMessages, strconv.FormatUint(uint64(index), 10))
+
+	res := &MilestoneIncludedMessagesResponse{}
 	_, err := api.Do(ctx, http.MethodGet, query, nil, res)
 	if err != nil {
 		return nil, err
