@@ -874,7 +874,7 @@ type MilestoneIncludedMessagesResponse struct {
 	// The index of the milestone.
 	Index uint32 `json:"index"`
 	// The hex encoded message IDs of the messages included in the milestone with the given index
-	MessageID []string `json:"includedMessages"`
+	IncludedMessages []string `json:"includedMessages"`
 }
 
 // MilestoneIncludedMessagesByIndex gets a milestone included messages by its index.
